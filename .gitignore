@@ -10,3 +10,4 @@ app_static/
 *.tox/
 /.env/
 .DS_Store
+/.idea/
