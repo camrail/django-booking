@@ -6,12 +6,12 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from django_libs.models_mixins import TranslationModelMixin
+#from django_libs.models_mixins import TranslationModelMixin
 from django_countries.fields import CountryField
 from hvad.models import TranslatableModel, TranslatedFields
 
 
-class BookingStatus(TranslationModelMixin, TranslatableModel):
+class BookingStatus(TranslatableModel):
     """
     Master data containing all booking status.
     For translatable fields check ``BookingStatusTranslation``.
@@ -77,13 +77,13 @@ class Booking(models.Model):
         'auth.User',
         verbose_name=_('User'),
         related_name='bookings',
-        blank=True, null=True,
+        blank=True, null=True, on_delete=models.CASCADE,
     )
 
     session = models.ForeignKey(
         'sessions.Session',
         verbose_name=_('Session'),
-        blank=True, null=True,
+        blank=True, null=True, on_delete=models.CASCADE,
     )
 
     gender = models.CharField(
@@ -195,7 +195,7 @@ class Booking(models.Model):
     booking_status = models.ForeignKey(
         'booking.BookingStatus',
         verbose_name=('Booking status'),
-        blank=True, null=True,
+        blank=True, null=True, on_delete=models.CASCADE,
     )
 
     notes = models.TextField(
@@ -256,7 +256,7 @@ class BookingError(models.Model):
     """
     booking = models.ForeignKey(
         Booking,
-        verbose_name=_('Booking'),
+        verbose_name=_('Booking'), on_delete=models.CASCADE,
     )
     message = models.CharField(
         verbose_name=_('Message'),
@@ -312,13 +312,13 @@ class BookingItem(models.Model):
     )
 
     # GFK 'booked_item'
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType,on_delete=models.CASCADE)
     object_id = models.PositiveIntegerField()
     booked_item = GenericForeignKey('content_type', 'object_id')
 
     booking = models.ForeignKey(
         'booking.Booking',
-        verbose_name=_('Booking'),
+        verbose_name=_('Booking'), on_delete=models.CASCADE,
     )
 
     class Meta:
@@ -361,7 +361,7 @@ class ExtraPersonInfo(models.Model):
 
     booking = models.ForeignKey(
         'booking.Booking',
-        verbose_name=_('Booking'),
+        verbose_name=_('Booking'), on_delete=models.CASCADE,
     )
 
     message = models.TextField(

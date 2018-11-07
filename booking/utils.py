@@ -18,7 +18,7 @@ def get_booking(request):
 
     """
     booking = None
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         try:
             booking = Booking.objects.get(
                 user=request.user,
