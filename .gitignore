@@ -8,3 +8,5 @@ app_media/
 app_static/
 .coverage
 *.tox/
+/.env/
+.DS_Store
