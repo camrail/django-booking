@@ -7,10 +7,9 @@ from django.utils.translation import ugettext_lazy as _
 
 #from django_libs.models_mixins import TranslationModelMixin
 from django_countries.fields import CountryField
-from hvad.models import TranslatableModel, TranslatedFields
 
 
-class BookingStatus(TranslatableModel):
+class BookingStatus(models.Model):
     """
     Master data containing all booking status.
     For translatable fields check ``BookingStatusTranslation``.
@@ -23,13 +22,6 @@ class BookingStatus(TranslatableModel):
     """
     slug = models.SlugField(
         verbose_name=_('Slug'),
-    )
-
-    translations = TranslatedFields(
-        name=models.CharField(
-            verbose_name=_('Name'),
-            max_length=128,
-        )
     )
 
 
