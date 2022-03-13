@@ -1,8 +1,6 @@
 """Admin classes for the booking app."""
 from django.contrib import admin
 
-from hvad.admin import TranslatableAdmin
-
 from . import models
 
 
@@ -20,5 +18,5 @@ class BookingItemAdmin(admin.ModelAdmin):
 admin.site.register(models.Booking, BookingAdmin)
 admin.site.register(models.BookingError)
 admin.site.register(models.BookingItem, BookingItemAdmin)
-admin.site.register(models.BookingStatus, TranslatableAdmin)
+admin.site.register(models.BookingStatus)
 admin.site.register(models.ExtraPersonInfo)
