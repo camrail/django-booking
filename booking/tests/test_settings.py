@@ -25,36 +25,41 @@ STATICFILES_DIRS = (
     os.path.join(APP_ROOT, 'static'),
 )
 
-TEMPLATES = [{
-    'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'APP_DIRS': True,
-    'DIRS': [os.path.join(APP_ROOT, 'tests/test_app/templates')],
-    'OPTIONS': {
-        'context_processors': (
-            'django.contrib.auth.context_processors.auth',
-            'django.template.context_processors.request',
-        )
-    }
-}]
 
-MIDDLEWARE_CLASSES = (
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(APP_ROOT, 'tests/test_app/templates')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-)
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
 EXTERNAL_APPS = [
     'django.contrib.admin',
-    'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    'django.contrib.messages',
     'django.contrib.sessions',
+    'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sitemaps',
-    'django.contrib.sites',
 ]
-
 INTERNAL_APPS = [
     'booking',
     'booking.tests.test_app',

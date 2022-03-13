@@ -1,18 +1,15 @@
 """URLs for the booking app."""
-try:
-    from django.conf.urls import url
-except ImportError:  # Pre-Django 1.4 version
-    from django.conf.urls.defaults import url
+from django.urls import path
 
 from . import views
 
-
+app_name = 'booking'
 urlpatterns = [
-    url(r'^(?P<pk>\d+)/$',
+    path('(<pk>\d+)/',
         views.BookingDetailView.as_view(),
         name='booking_detail'),
-    url(r'^create/$',
+    path('create/',
         views.BookingCreateView.as_view(),
         name='booking_create'),
-    url(r'^$', views.BookingListView.as_view(), name='booking_list'),
+    path(r'', views.BookingListView.as_view(), name='booking_list'),
 ]

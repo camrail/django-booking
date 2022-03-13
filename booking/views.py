@@ -1,7 +1,7 @@
 """Views for the booking app."""
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import Http404
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView
@@ -27,7 +27,7 @@ class BookingCreateView(BookingViewMixin, CreateView):
     def get_form_kwargs(self, *args, **kwargs):
         kwargs = super(BookingCreateView, self).get_form_kwargs(
             *args, **kwargs)
-        if self.request.user.is_authenticated():
+        if self.request.user.is_authenticated:
             kwargs.update({'user': self.request.user})
         else:
             # If the user is not authenticated, get the current session
@@ -44,7 +44,7 @@ class BookingDetailView(BookingViewMixin, DetailView):
     def dispatch(self, request, *args, **kwargs):
         self.kwargs = kwargs
         self.object = self.get_object()
-        if request.user.is_authenticated():
+        if request.user.is_authenticated:
             # If user doesn't own the booking forbid access
             if not self.object.user == request.user:
                 raise Http404
