@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from django_libs.models_mixins import TranslationModelMixin
@@ -34,7 +33,6 @@ class BookingStatus(TranslationModelMixin, TranslatableModel):
     )
 
 
-@python_2_unicode_compatible
 class Booking(models.Model):
     """
     Model to contain information about a booking.
@@ -237,7 +235,6 @@ class Booking(models.Model):
                                  self.creation_date)
 
 
-@python_2_unicode_compatible
 class BookingError(models.Model):
     """
     Holds information about an error during a booking process.
@@ -279,7 +276,6 @@ class BookingError(models.Model):
                                          self.message)
 
 
-@python_2_unicode_compatible
 class BookingItem(models.Model):
     """
     Model to connect a booking with a related object.
@@ -332,7 +328,6 @@ class BookingItem(models.Model):
         return self.quantity * self.subtotal
 
 
-@python_2_unicode_compatible
 class ExtraPersonInfo(models.Model):
     """
     Model to add extra information of persons/guests to a booking.
